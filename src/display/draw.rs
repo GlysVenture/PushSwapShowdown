@@ -3,7 +3,7 @@ pub struct Rectangle {
 	pub(crate) posy: u32,
 	pub(crate) x: u32,
 	pub(crate) y: u32,
-	color: [u8; 4],
+	pub(crate) color: [u8; 4],
 }
 
 pub fn putpixel(frame: &mut [u8], color: [u8; 4], size: [u32; 2], pos: [u32; 2]) {

@@ -58,4 +58,19 @@ impl Stacks {
 			self.b.insert(0, temp);
 		}
 	}
+
+	pub fn m_ss(&mut self){
+		self.m_sa();
+		self.m_sb();
+	}
+
+	pub fn m_rr(&mut self){
+		self.m_ra();
+		self.m_rb();
+	}
+
+	pub fn m_rrr(&mut self){
+		self.m_rra();
+		self.m_rrb();
+	}
 }
