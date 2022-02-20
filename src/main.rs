@@ -14,6 +14,7 @@ fn main() {
     let args: Vec<String> = env::args().collect();
     if args.len() != 5 {
         eprintln!("Invalid args");
+        eprintln!("usage: p_swap_showdown [program1] [program2] [min] [max]");
         process::exit(1);
     } //todo usage
 
