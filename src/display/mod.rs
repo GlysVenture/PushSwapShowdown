@@ -4,8 +4,11 @@ mod button;
 use std::str::Split;
 use winit::{dpi::LogicalSize, event::{Event, WindowEvent}, event, event_loop::{ControlFlow, EventLoop}, window::WindowBuilder};
 use pixels::{Pixels, SurfaceTexture};
+use winit::dpi::{LogicalPosition, PhysicalPosition, Pixel};
 use winit::event::DeviceEvent::Button;
-use winit::event::VirtualKeyCode::W;
+use winit::event::VirtualKeyCode::{L, W};
+use winit::monitor::MonitorHandle;
+use winit::window::Window;
 use crate::display::button::GuiButton;
 use crate::display::draw::{fill, Rectangle};
 use crate::stack::Stacks;
@@ -59,7 +62,6 @@ pub fn visualize(_progs: &[String], mut out1: Vec<String>, mut out2: Vec<String>
 				event: WindowEvent::CloseRequested,
 				..
 			} => {
-				println!("The close button was pressed; stopping");
 				*control_flow = ControlFlow::Exit
 			},
 			Event::WindowEvent {
@@ -69,7 +71,7 @@ pub fn visualize(_progs: &[String], mut out1: Vec<String>, mut out2: Vec<String>
 				},
 				..
 			} => {
-				mouse = position.into();
+				mouse = position.to_logical::<f64>( window.current_monitor().unwrap().scale_factor()).into();
 			},
 			Event::WindowEvent {
 				event: WindowEvent::MouseInput {

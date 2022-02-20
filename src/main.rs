@@ -6,9 +6,9 @@ mod stack;
 
 use display::visualize;
 use std::{env, process};
+use std::process::ExitStatus;
 use rand::thread_rng;
 use rand::seq::SliceRandom;
-use winit::event::VirtualKeyCode::S;
 
 fn main() {
     let args: Vec<String> = env::args().collect();
@@ -29,8 +29,6 @@ fn main() {
 
     let input = gen_input(size);
     let input_string = string_input(&input);
-    println!("{}", input_string);
-    println!("{:?}", progs);
     showdown(progs, input_string, input);
 }
 
@@ -52,6 +50,15 @@ fn showdown(progs: &[String], input_str: String, input: Vec<i32>){
     let output1 = proc::process_output(&mut process1, &progs[0]);
     let output2 = proc::process_output(&mut process2, &progs[1]);
 
+    process1.wait().unwrap_or_else(|e| {
+        eprintln!("{}: Error {}", progs[0], e);
+        std::process::exit(1);
+    });
+    process2.wait().unwrap_or_else(|e| {
+        eprintln!("{}: Error {}", progs[0], e);
+        std::process::exit(1);
+    });
+
     if check_output(&output1) { eprintln!("{}: Invalid output", progs[0]); }
     if check_output(&output2) { eprintln!("{}: Invalid output", progs[1]); }
 
@@ -59,9 +66,6 @@ fn showdown(progs: &[String], input_str: String, input: Vec<i32>){
               output1.split("\n").map(|s| s.to_string()).collect(),
               output2.split("\n").map(|s| s.to_string()).collect(),
               input);
-
-    process1.wait();
-    process2.wait();
 }
 
 //stuff

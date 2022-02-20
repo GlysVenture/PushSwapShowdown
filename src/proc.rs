@@ -16,7 +16,7 @@ pub(crate) fn process_output(process: &mut Child, name: &String) -> String {
 	let mut output = String::new();
 	match process.stdout.take().unwrap().read_to_string(&mut output) {
 		Err(why) => panic!("couldn't read [{}]{} stdout: {}", process.id(), name, why),
-		Ok(_) => print!("[{}]{} responded with:\n{}", process.id(), name, output),
+		Ok(_) => {},
 	}
 	output
 }
