@@ -1,7 +1,6 @@
 mod moves;
 
-use std::io::Split;
-use crate::display::draw::{fill, Rectangle};
+use crate::display::draw::Rectangle;
 use crate::display::WIN_SIZE;
 
 pub(crate) const STACK_BORDER: u32 = 5;

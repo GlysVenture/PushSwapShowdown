@@ -1,14 +1,8 @@
 pub mod draw;
 mod button;
 
-use std::str::Split;
-use winit::{dpi::LogicalSize, event::{Event, WindowEvent}, event, event_loop::{ControlFlow, EventLoop}, window::WindowBuilder};
+use winit::{dpi::LogicalSize, event::{Event, WindowEvent}, event_loop::{ControlFlow, EventLoop}, window::WindowBuilder};
 use pixels::{Pixels, SurfaceTexture};
-use winit::dpi::{LogicalPosition, PhysicalPosition, Pixel};
-use winit::event::DeviceEvent::Button;
-use winit::event::VirtualKeyCode::{L, W};
-use winit::monitor::MonitorHandle;
-use winit::window::Window;
 use crate::display::button::GuiButton;
 use crate::display::draw::{fill, Rectangle};
 use crate::stack::Stacks;
@@ -52,6 +46,10 @@ pub fn visualize(_progs: &[String], mut out1: Vec<String>, mut out2: Vec<String>
 		y: MID[0] - BORDER * 2,
 		color: [200, 0, 100, 0xff]
 	});
+
+	println!("program: {} uses {} moves", _progs[0], out1.len());
+	println!("program: {} uses {} moves", _progs[1], out2.len());
+	println!("program: {} wins!", _progs[(out1.len() > out2.len()) as usize]  );
 
 	event_loop.run(move |event, _, control_flow| {
 		//*control_flow = ControlFlow::Poll;

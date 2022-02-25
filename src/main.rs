@@ -6,7 +6,6 @@ mod stack;
 
 use display::visualize;
 use std::{env, process};
-use std::process::ExitStatus;
 use rand::thread_rng;
 use rand::seq::SliceRandom;
 
@@ -16,7 +15,7 @@ fn main() {
         eprintln!("Invalid args");
         eprintln!("usage: p_swap_showdown [program1] [program2] [min] [max]");
         process::exit(1);
-    } //todo usage
+    }
 
     let progs = &args[1..3];
     let mut size: [i32; 2] = [0, 0];
